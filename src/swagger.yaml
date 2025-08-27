@@ -1,0 +1,52 @@
+openapi: 3.0.3
+info:
+    title: Swagger TheBookCabinet
+    description: >-
+        TheBookCabinet server based on OpenAPI 3.0 specifications.
+    version: 1.0.0
+externalDocs:
+    description: Find out more about Swagger
+    url: http://swagger.io
+servers:
+    - url: http://localhost:4000
+tags:
+    - name: sample
+      description: Actions on samples
+      externalDocs:
+          description: More infos
+paths:
+    /books:
+        get:
+            tags:
+                - book
+            summary: Returns all books
+            description: Returns a list of all books
+            operationId: getBooks
+            responses:
+                "200":
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Book"
+                "204":
+                    description: No content
+components:
+    schemas:
+        Book:
+            type: object
+            properties:
+                _id:
+                    type: string
+                    description: Unique identifier for the book
+                title:
+                    type: string
+                    description: Title of the book
+                author:
+                    type: string
+                    description: Author of the book
+                genre:
+                    type: array
+                    items:
+                        type: string
+                    description: List of genres the book belongs to
