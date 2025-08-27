@@ -7,8 +7,6 @@ info:
 externalDocs:
     description: Find out more about Swagger
     url: http://swagger.io
-servers:
-    - url: http://localhost:4000
 tags:
     - name: sample
       description: Actions on samples

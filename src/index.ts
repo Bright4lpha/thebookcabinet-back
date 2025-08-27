@@ -24,11 +24,18 @@ app.listen(PORT, "0.0.0.0", () => {
 
 const swaggerUi = require("swagger-ui-express");
 const fs = require("fs");
-const YAML = require("yaml");
+const YAML = require("yamljs");
+require("dotenv").config();
 
-const swaggerPath = path.join(__dirname, "swagger.yaml");
-const file = fs.readFileSync(swaggerPath, "utf8");
+// const swaggerPath = path.join(__dirname, "swagger.yaml");
+// const file = fs.readFileSync(swaggerPath, "utf8");
 // const file = fs.readFileSync("./src/swagger.yaml", "utf8");
-const swaggerDocument = YAML.parse(file);
+const swaggerDocument = YAML.load("./src/swagger.yaml");
+
+swaggerDocument.servers = [
+    {
+        url: process.env.SERVER_URL,
+    },
+];
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
