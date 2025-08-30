@@ -29,6 +29,29 @@ paths:
                                 $ref: "#/components/schemas/Book"
                 "204":
                     description: No content
+    /books/{id}:
+        get:
+            tags:
+                - book
+            summary: Returns a book by ID
+            description: Returns a single book
+            operationId: getBook
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: ID of the book to retrieve
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Book"
+                "404":
+                    description: Book not found
 components:
     schemas:
         Book:

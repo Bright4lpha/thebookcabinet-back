@@ -15,3 +15,8 @@ export const getBooksModel = async (): Promise<Book[]> => {
     await connectDB();
     return BookModel.find().exec();
 };
+
+export const getBookModel = async (id: string): Promise<Book | null> => {
+    await connectDB();
+    return BookModel.findById(id).exec();
+};
