@@ -29,6 +29,29 @@ paths:
                                 $ref: "#/components/schemas/Book"
                 "204":
                     description: No content
+                "500":
+                    description: Internal Server Error
+        post:
+            tags:
+                - book
+            summary: Creates a new book
+            description: Creates a new book
+            operationId: createBook
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/BookInput"
+            responses:
+                "201":
+                    description: Book created successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Book"
+                "500":
+                    description: Internal Server Error
     /books/{id}:
         get:
             tags:
@@ -52,6 +75,56 @@ paths:
                                 $ref: "#/components/schemas/Book"
                 "404":
                     description: Book not found
+        patch:
+            tags:
+                - book
+            summary: Updates a book by ID
+            description: Updates a single book
+            operationId: updateBook
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: ID of the book to update
+                  schema:
+                      type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/BookInput"
+            responses:
+                "200":
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Book"
+                "404":
+                    description: Book not found
+                "500":
+                    description: Internal Server Error
+        delete:
+            tags:
+                - book
+            summary: Deletes a book by ID
+            description: Deletes a single book
+            operationId: deleteBook
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: ID of the book to delete
+                  schema:
+                      type: string
+            responses:
+                "204":
+                    description: Book deleted successfully
+                "404":
+                    description: Book not found
+                "500":
+                    description: Internal Server Error
 components:
     schemas:
         Book:
@@ -60,14 +133,39 @@ components:
                 _id:
                     type: string
                     description: Unique identifier for the book
+                    example: "64a7f0c2e4b0c8b1a1e4d2f3"
                 title:
                     type: string
                     description: Title of the book
+                    example: "Alice's Adventures in Wonderland"
                 author:
                     type: string
                     description: Author of the book
+                    example: "Lewis Carroll"
                 genre:
                     type: array
                     items:
                         type: string
                     description: List of genres the book belongs to
+                    example: ["Fantasy", "Adventure"]
+                __v:
+                    type: integer
+                    description: Version number of the book document
+                    example: 0
+        BookInput:
+            type: object
+            properties:
+                title:
+                    type: string
+                    description: Title of the book
+                    example: "Alice's Adventures in Wonderland"
+                author:
+                    type: string
+                    description: Author of the book
+                    example: "Lewis Carroll"
+                genre:
+                    type: array
+                    items:
+                        type: string
+                    description: List of genres the book belongs to
+                    example: ["Fantasy", "Adventure"]

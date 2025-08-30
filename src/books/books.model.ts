@@ -20,3 +20,24 @@ export const getBookModel = async (id: string): Promise<Book | null> => {
     await connectDB();
     return BookModel.findById(id).exec();
 };
+
+export const postBookModel = async (book: Book): Promise<Book> => {
+    await connectDB();
+    const newBook = new BookModel(book);
+    return newBook.save();
+};
+
+export const patchBookModel = async (
+    id: string,
+    book: Partial<Book>
+): Promise<Book | null> => {
+    await connectDB();
+    console.log("Updating book with ID:", id, "with data:", book);
+
+    return BookModel.findByIdAndUpdate(id, book, { new: true }).exec();
+};
+
+export const deleteBookModel = async (id: string): Promise<Book | null> => {
+    await connectDB();
+    return BookModel.findByIdAndDelete(id).exec();
+};

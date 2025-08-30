@@ -1,13 +1,16 @@
 import express from "express";
+import bodyParser from "body-parser";
 import connectDB from "./db";
 
 import booksRouter from "./books/books.routes";
-import path from "path";
+// import path from "path";
 
 const app = express();
 const PORT = 4000;
 
-app.use(express.json());
+// Middleware pour parser les requêtes JSON
+// app.use(express.json());
+app.use(bodyParser.json());
 
 connectDB();
 
