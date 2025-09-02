@@ -148,6 +148,10 @@ components:
                         type: string
                     description: List of genres the book belongs to
                     example: ["Fantasy", "Adventure"]
+                url_image:
+                    type: string
+                    description: URL of the book's cover image
+                    example: "http://example.com/cover.jpg"
                 __v:
                     type: integer
                     description: Version number of the book document
@@ -169,3 +173,7 @@ components:
                         type: string
                     description: List of genres the book belongs to
                     example: ["Fantasy", "Adventure"]
+                url_image:
+                    type: string
+                    description: URL of the book's cover image
+                    example: "http://example.com/cover.jpg"

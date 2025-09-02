@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import bodyParser from "body-parser";
 import connectDB from "./db";
 
@@ -11,6 +12,14 @@ const PORT = 4000;
 // Middleware pour parser les requêtes JSON
 // app.use(express.json());
 app.use(bodyParser.json());
+// ✅ autoriser seulement le front React
+app.use(
+    cors({
+        origin: process.env.FRONT_URL,
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
 
 connectDB();
 
