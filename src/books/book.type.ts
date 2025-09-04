@@ -4,4 +4,5 @@ export type Book = {
     author: string;
     genre: string[];
     url_image: string;
+    isbn?: string; // Optional field for ISBN number
 };

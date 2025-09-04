@@ -8,6 +8,7 @@ const bookSchema: Schema<Book> = new Schema({
     author: { type: String, required: true },
     genre: { type: [String], required: true },
     url_image: { type: String, required: false },
+    isbn: { type: String, required: false },
 });
 
 export const BookModel: Model<Book> = mongoose.model<Book>("Book", bookSchema);

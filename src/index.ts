@@ -3,16 +3,16 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import connectDB from "./db";
 
+// Import routes
 import booksRouter from "./books/books.routes";
-// import path from "path";
+import usersRouter from "./users/users.routes";
 
 const app = express();
 const PORT = 4000;
 
 // Middleware pour parser les requêtes JSON
-// app.use(express.json());
 app.use(bodyParser.json());
-// ✅ autoriser seulement le front React
+// autoriser seulement le front React
 app.use(
     cors({
         origin: process.env.FRONT_URL,
@@ -24,6 +24,7 @@ app.use(
 connectDB();
 
 app.use("/books", booksRouter);
+app.use("/users", usersRouter);
 app.get("/", (req, res) => {
     res.send(
         `Hello from The Book Cabinet ! Your Node Express server is running on port ${PORT}`
