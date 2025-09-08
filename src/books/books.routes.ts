@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 import {
     getBookController,
     getBooksController,
+    getBookByISBNController,
     postBookController,
     patchBookController,
     deleteBookController,
@@ -18,6 +19,10 @@ router.get("/", function (req: Request, res: Response) {
 
 router.get("/:id", function (req: Request, res: Response) {
     getBookController(req, res);
+});
+
+router.get("/isbn/:isbn", function (req: Request, res: Response) {
+    getBookByISBNController(req, res);
 });
 
 router.post("/", verifyJWT, postBookController);

@@ -8,9 +8,9 @@ externalDocs:
     description: Find out more about Swagger
     url: http://swagger.io
 tags:
-    - name: books
+    - name: book
       description: Actions on books
-    - name: users
+    - name: user
       description: Actions on users
 paths:
     /books:
@@ -127,6 +127,31 @@ paths:
             responses:
                 "204":
                     description: Book deleted successfully
+                "404":
+                    description: Book not found
+                "500":
+                    description: Internal Server Error
+    /books/isbn/{isbn}:
+        get:
+            tags:
+                - book
+            summary: Returns a book by ISBN
+            description: Returns a single book by its ISBN number
+            operationId: getBookByISBN
+            parameters:
+                - name: isbn
+                  in: path
+                  required: true
+                  description: ISBN number of the book to retrieve
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Book"
                 "404":
                     description: Book not found
                 "500":

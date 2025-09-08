@@ -6,6 +6,7 @@ import {
     postBookModel,
     deleteBookModel,
     patchBookModel,
+    getBookByISBNModel,
 } from "./books.model";
 
 export const getBooksController = async (_req: Request, res: Response) => {
@@ -30,6 +31,20 @@ export const getBookController = async (_req: Request, res: Response) => {
         return res.status(200).json(book);
     } catch (error) {
         console.error("Error fetching book:", error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+export const getBookByISBNController = async (_req: Request, res: Response) => {
+    try {
+        const isbn: string = _req.params.isbn;
+        const book: Book | null = await getBookByISBNModel(isbn);
+        if (!book) {
+            return res.status(404).json({ error: "Book not found" });
+        }
+        return res.status(200).json(book);
+    } catch (error) {
+        console.error("Error fetching book by ISBN:", error);
         return res.status(500).json({ message: "Internal Server Error" });
     }
 };

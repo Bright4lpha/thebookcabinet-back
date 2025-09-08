@@ -23,6 +23,13 @@ export const getBookModel = async (id: string): Promise<Book | null> => {
     return BookModel.findById(id).exec();
 };
 
+export const getBookByISBNModel = async (
+    isbn: string
+): Promise<Book | null> => {
+    await connectDB();
+    return BookModel.findOne({ isbn }).exec();
+};
+
 export const postBookModel = async (book: Book): Promise<Book> => {
     await connectDB();
     const newBook = new BookModel(book);
