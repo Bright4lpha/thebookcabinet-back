@@ -4,3 +4,7 @@ export type User = {
     email: string;
     password: string; // Hashed password
 };
+
+export type UserName = {
+    username: string;
+};

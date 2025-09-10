@@ -7,10 +7,19 @@ import {
     postUserController,
     loginUserController,
     deleteUserController,
+    getUsernameController,
+    getEmailController,
 } from "./users.controller";
 
 router.get("/:id", function (req: Request, res: Response) {
     getUserController(req, res);
+});
+
+router.get("/username/:username", async (req: Request, res: Response) => {
+    await getUsernameController(req, res);
+});
+router.get("/email/:email", async (req: Request, res: Response) => {
+    await getEmailController(req, res);
 });
 
 router.post("/", function (req: Request, res: Response) {

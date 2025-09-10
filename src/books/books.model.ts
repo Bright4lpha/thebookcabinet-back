@@ -5,10 +5,15 @@ import { Book } from "./book.type";
 
 const bookSchema: Schema<Book> = new Schema({
     title: { type: String, required: true },
-    author: { type: String, required: true },
-    genre: { type: [String], required: true },
+    author: { type: [String], required: true },
+    genre: { type: [String], required: false },
     url_image: { type: String, required: false },
     isbn: { type: String, required: false },
+    language: { type: String, required: false },
+    description: { type: String, required: false },
+    publishedDate: { type: String, required: false },
+    publisher: { type: String, required: false },
+    pages: { type: Number, required: false },
 });
 
 export const BookModel: Model<Book> = mongoose.model<Book>("Book", bookSchema);

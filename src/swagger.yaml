@@ -236,9 +236,11 @@ components:
                     description: Title of the book
                     example: "Alice's Adventures in Wonderland"
                 author:
-                    type: string
-                    description: Author of the book
-                    example: "Lewis Carroll"
+                    type: array
+                    items:
+                        type: string
+                    description: Author(s) of the book
+                    example: ["Lewis Carroll"]
                 genre:
                     type: array
                     items:
@@ -253,6 +255,26 @@ components:
                     type: string
                     description: ISBN number of the book
                     example: "9783161484100"
+                language:
+                    type: string
+                    description: Language of the book
+                    example: "English"
+                description:
+                    type: string
+                    description: Description of the book
+                    example: "A novel about a young girl's adventures in a fantastical world."
+                publishedDate:
+                    type: string
+                    description: Published date of the book
+                    example: "1865-07-04"
+                publisher:
+                    type: string
+                    description: Publisher of the book
+                    example: "Macmillan Publishers"
+                pages:
+                    type: integer
+                    description: Number of pages in the book
+                    example: 200
                 __v:
                     type: integer
                     description: Version number of the book document
@@ -265,9 +287,11 @@ components:
                     description: Title of the book
                     example: "Alice's Adventures in Wonderland"
                 author:
-                    type: string
-                    description: Author of the book
-                    example: "Lewis Carroll"
+                    type: array
+                    items:
+                        type: string
+                    description: Author(s) of the book
+                    example: ["Lewis Carroll"]
                 genre:
                     type: array
                     items:
@@ -281,7 +305,27 @@ components:
                 isbn:
                     type: string
                     description: ISBN number of the book
-                    example: " 9783161484100"
+                    example: "9783161484100"
+                language:
+                    type: string
+                    description: Language of the book
+                    example: "English"
+                description:
+                    type: string
+                    description: Description of the book
+                    example: "A novel about a young girl's adventures in a fantastical world."
+                publishedDate:
+                    type: string
+                    description: Published date of the book
+                    example: "1865-07-04"
+                publisher:
+                    type: string
+                    description: Publisher of the book
+                    example: "Macmillan Publishers"
+                pages:
+                    type: integer
+                    description: Number of pages in the book
+                    example: 200
         User:
             type: object
             properties:

@@ -19,6 +19,18 @@ export const getUserModel = async (id: string): Promise<User | null> => {
     return UserModel.findById(id).exec();
 };
 
+export const getUsernameModel = async (
+    username: string
+): Promise<User | null> => {
+    await connectDB();
+    return UserModel.findOne({ username: username }).exec();
+};
+
+export const getEmailModel = async (email: string): Promise<User | null> => {
+    await connectDB();
+    return UserModel.findOne({ email: email }).exec();
+};
+
 export const postUserModel = async (user: User): Promise<User> => {
     await connectDB();
     const newUser = new UserModel({
