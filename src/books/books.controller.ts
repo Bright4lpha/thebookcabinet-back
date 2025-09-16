@@ -9,9 +9,24 @@ import {
     getBookByISBNModel,
 } from "./books.model";
 
-export const getBooksController = async (_req: Request, res: Response) => {
+interface AuthRequest extends Request {
+    auth?: {
+        userId: string;
+        username: string;
+        email: string;
+    };
+}
+
+export const getBooksController = async (req: AuthRequest, res: Response) => {
     try {
-        const books: Array<Book> = await getBooksModel();
+        console.log("Request auth data:", req.auth);
+        if (!req.auth || !req.auth.userId) {
+            return res
+                .status(401)
+                .json({ error: "Unauthorized: Missing authentication" });
+        }
+        console.log("Fetching books for user ID:", req.auth.userId);
+        const books: Array<Book> = await getBooksModel(req.auth.userId);
         if (books.length === 0) {
             return res.status(404).json({ error: "No books found" });
         }
@@ -49,9 +64,9 @@ export const getBookByISBNController = async (_req: Request, res: Response) => {
     }
 };
 
-export const postBookController = async (req: Request, res: Response) => {
+export const postBookController = async (req: AuthRequest, res: Response) => {
     try {
-        const newBook: Book = req.body;
+        const newBook: Book = { ...req.body, userId: req.auth?.userId };
         const createdBook = await postBookModel(newBook);
         return res.status(201).json(createdBook);
     } catch (error) {

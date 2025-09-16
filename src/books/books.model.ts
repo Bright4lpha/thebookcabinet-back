@@ -14,13 +14,14 @@ const bookSchema: Schema<Book> = new Schema({
     publishedDate: { type: String, required: false },
     publisher: { type: String, required: false },
     pages: { type: Number, required: false },
+    userId: { type: String, required: true }, // ID of the user who added the book
 });
 
 export const BookModel: Model<Book> = mongoose.model<Book>("Book", bookSchema);
 
-export const getBooksModel = async (): Promise<Book[]> => {
+export const getBooksModel = async (userId: string): Promise<Book[]> => {
     await connectDB();
-    return BookModel.find().exec();
+    return BookModel.find({ userId }).exec();
 };
 
 export const getBookModel = async (id: string): Promise<Book | null> => {

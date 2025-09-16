@@ -13,9 +13,7 @@ import {
 
 import { verifyJWT } from "../common/jwt.middleware";
 
-router.get("/", function (req: Request, res: Response) {
-    getBooksController(req, res);
-});
+router.get("/", verifyJWT, getBooksController);
 
 router.get("/:id", function (req: Request, res: Response) {
     getBookController(req, res);
