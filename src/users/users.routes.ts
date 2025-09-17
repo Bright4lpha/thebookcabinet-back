@@ -9,7 +9,11 @@ import {
     deleteUserController,
     getUsernameController,
     getEmailController,
+    getMeController,
 } from "./users.controller";
+import { verifyJWT } from "../middleware/jwt.middleware";
+
+router.get("/me", verifyJWT, getMeController);
 
 router.get("/:id", function (req: Request, res: Response) {
     getUserController(req, res);

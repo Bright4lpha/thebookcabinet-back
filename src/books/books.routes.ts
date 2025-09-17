@@ -11,7 +11,7 @@ import {
     deleteBookController,
 } from "./books.controller";
 
-import { verifyJWT } from "../common/jwt.middleware";
+import { verifyJWT } from "../middleware/jwt.middleware";
 
 router.get("/", verifyJWT, getBooksController);
 

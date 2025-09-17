@@ -12,6 +12,23 @@ import {
     getEmailModel,
 } from "./users.model";
 
+export const getMeController = async (req: Request, res: Response) => {
+    try {
+        const userId = (req as any).auth?.userId;
+        if (!userId) {
+            return res.status(401).json({ error: "Unauthorized" });
+        }
+        const user: User | null = await getUserModel(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        return res.status(200).json(user);
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
 export const getUserController = async (req: Request, res: Response) => {
     try {
         const user: User | null = await getUserModel(req.params.id);
@@ -72,13 +89,9 @@ export const loginUserController = async (req: Request, res: Response) => {
             return res.status(401).json({ error: "Invalid email or password" });
         }
         var token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-            expiresIn: "24h",
+            expiresIn: "3h",
         });
         return res.status(200).json({
-            user: {
-                id: user._id,
-                email: user.email,
-            },
             token: token,
         });
     } catch (error) {
@@ -98,4 +111,21 @@ export const deleteUserController = async (req: Request, res: Response) => {
         console.error("Error deleting user:", error);
         return res.status(500).json({ message: "Internal Server Error" });
     }
+};
+
+export const getLoggedInUserController = async (
+    req: { user: { _id: any; email: any; username: any } },
+    res: {
+        status: (arg0: number) => {
+            (): any;
+            new (): any;
+            json: {
+                (arg0: { _id: any; email: any; username: any }): void;
+                new (): any;
+            };
+        };
+    }
+) => {
+    const { _id, email, username } = req.user;
+    res.status(200).json({ _id, email, username });
 };
